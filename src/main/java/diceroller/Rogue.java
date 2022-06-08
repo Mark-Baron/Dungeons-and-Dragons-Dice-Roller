@@ -5,14 +5,14 @@ import java.util.List;
 
 public class Rogue implements Class{
 
-    List savingThrows = new ArrayList<>();
+    List<String> savingThrows = new ArrayList<>();
 
-    public void setSavingThrowProf() {
+    public Rogue(){
         savingThrows.add("dexterity");
         savingThrows.add("intelligence");
     }
 
-    public List getSavingThrowProf(){
+    public List<String> getSavingThrowProf(){
         return savingThrows;
     }
 }

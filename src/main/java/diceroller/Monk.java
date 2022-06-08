@@ -4,14 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Monk implements Class{
-    List savingThrows = new ArrayList<>();
+    List <String> savingThrows = new ArrayList<>();
 
-    public void setSavingThrowProf(){
+
+    public Monk(){
         savingThrows.add("strength");
         savingThrows.add("dexterity");
     }
 
-    public List getSavingThrowProf(){
+    public List<String> getSavingThrowProf(){
         return savingThrows;
     }
 

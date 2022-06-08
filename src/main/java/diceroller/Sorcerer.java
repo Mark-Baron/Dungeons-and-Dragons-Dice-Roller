@@ -5,14 +5,14 @@ import java.util.List;
 
 public class Sorcerer implements Class{
 
-    List savingThrows = new ArrayList<>();
+    List<String> savingThrows = new ArrayList<>();
 
-    public void setSavingThrowProf() {
+    public Sorcerer(){
         savingThrows.add("charisma");
         savingThrows.add("constitution");
     }
 
-    public List getSavingThrowProf(){
+    public List<String> getSavingThrowProf(){
         return savingThrows;
     }
 }

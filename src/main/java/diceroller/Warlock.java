@@ -5,14 +5,14 @@ import java.util.List;
 
 public class Warlock implements Class{
 
-    List savingThrows = new ArrayList<>();
+    List<String> savingThrows = new ArrayList<>();
 
-    public void setSavingThrowProf() {
+    public Warlock(){
         savingThrows.add("wisdom");
         savingThrows.add("charisma");
     }
 
-    public List getSavingThrowProf(){
+    public List<String> getSavingThrowProf(){
         return savingThrows;
     }
 }

@@ -6,15 +6,13 @@ public class Roller {
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
-        Map<String, Dice> diceRoller = new HashMap<>();
-        Map<String, Integer> scoreModifiers = new HashMap<>();
-        Map<String, String> abilityScores = new HashMap<>();
-        Map<String, Boolean> proficiencies = new HashMap<>();
-        Map<String, String> abilitySkills = new HashMap<>();
-        Map<String, String> characterClasses = new HashMap<>();
-        Map<String, Class> classInstance = new HashMap<>();
+
         List<String> charactersSkills = new ArrayList<>();
 
+        Character character = new Character();
+        AttackRoll attackRoll = new AttackRoll();
+        SavingThrowRoll savingThrowRoll = new SavingThrowRoll();
+        AbilityCheckRoll abilityCheckRoll = new AbilityCheckRoll();
 
         String strengthScore;
         String dexScore;
@@ -29,94 +27,47 @@ public class Roller {
         String[] skillProficiencies;
 
 
-        diceRoller.put("4", new D4());
-        diceRoller.put("6", new D6());
-        diceRoller.put("8", new D8());
-        diceRoller.put("10", new D10());
-        diceRoller.put("12", new D12());
-        diceRoller.put("20", new D20());
-
-        classInstance.put("barbarian", new Barbarian());
-        classInstance.put("rogue", new Rogue());
-        classInstance.put("wizard", new Wizard());
-        classInstance.put("paladin", new Paladin());
-        classInstance.put("cleric", new Cleric());
-        classInstance.put("sorcerer", new Sorcerer());
-        classInstance.put("druid", new Druid());
-        classInstance.put("bard", new Bard());
-        classInstance.put("warlock", new Warlock());
-        classInstance.put("monk", new Monk());
-
-        scoreModifiers.put("3", -4);
-        scoreModifiers.put("4", -3);
-        scoreModifiers.put("5", -3);
-        scoreModifiers.put("6", -2);
-        scoreModifiers.put("7", -2);
-        scoreModifiers.put("8", -1);
-        scoreModifiers.put("9", -1);
-        scoreModifiers.put("10", 0);
-        scoreModifiers.put("11", 0);
-        scoreModifiers.put("12", 1);
-        scoreModifiers.put("13", 1);
-        scoreModifiers.put("14", 2);
-        scoreModifiers.put("15", 2);
-        scoreModifiers.put("16", 3);
-        scoreModifiers.put("17", 3);
-        scoreModifiers.put("18", 4);
-        scoreModifiers.put("19", 4);
-        scoreModifiers.put("20", 5);
-
-        abilitySkills.put("acrobatics", "dexterity");
-        abilitySkills.put("sleight of hand", "dexterity");
-        abilitySkills.put("stealth", "dexterity");
-        abilitySkills.put("athletics", "strength");
-        abilitySkills.put("arcana", "intelligence");
-        abilitySkills.put("history", "intelligence");
-        abilitySkills.put("investigation", "intelligence");
-        abilitySkills.put("nature", "intelligence");
-        abilitySkills.put("religion", "intelligence");
-        abilitySkills.put("animal handling", "wisdom");
-        abilitySkills.put("insight", "wisdom");
-        abilitySkills.put("medicine", "wisdom");
-        abilitySkills.put("perception", "wisdom");
-        abilitySkills.put("survival", "wisdom");
-        abilitySkills.put("deception", "charisma");
-        abilitySkills.put("intimidation", "charisma");
-        abilitySkills.put("performance", "charisma");
-        abilitySkills.put("persuasion", "charisma");
-
-
         //Take user input for class, ability scores and proficiency score
-        System.out.println("Please enter your character's class: ");
-        classType = scanner.nextLine().toLowerCase();
+        System.out.println("Please select your character's class:");
+        System.out.println("1) Barbarian");
+        System.out.println("2) Bard");
+        System.out.println("3) Cleric");
+        System.out.println("4) Druid");
+        System.out.println("5) Monk");
+        System.out.println("6) Paladin");
+        System.out.println("7) Rogue");
+        System.out.println("8) Sorcerer");
+        System.out.println("9) Warlock");
+        System.out.println("10) Wizard");
+        classType = scanner.nextLine();
 
         System.out.println("Please enter your character's stats \nStrength: ");
         strengthScore = scanner.nextLine();
-        abilityScores.put("strength", strengthScore);
+        character.setStrengthScore(Integer.parseInt(strengthScore));
 
         System.out.println("Dexterity: ");
         dexScore = scanner.nextLine();
-        abilityScores.put("dexterity", dexScore);
+        character.setDexScore(Integer.parseInt(dexScore));
 
         System.out.println("Constitution: ");
         conScore = scanner.nextLine();
-        abilityScores.put("constitution", conScore);
+        character.setConScore(Integer.parseInt(conScore));
 
         System.out.println("Intelligence: ");
         intScore = scanner.nextLine();
-        abilityScores.put("intelligence", intScore);
+        character.setIntScore(Integer.parseInt(intScore));
 
         System.out.println("Wisdom: ");
         wisdomScore = scanner.nextLine();
-        abilityScores.put("wisdom", wisdomScore);
+        character.setWisScore(Integer.parseInt(wisdomScore));
 
         System.out.println("Charisma: ");
         charismaScore = scanner.nextLine();
-        abilityScores.put("charisma", charismaScore);
+        character.setCharScore(Integer.parseInt(charismaScore));
 
         System.out.println("Proficiency Bonus: ");
         profBonus = scanner.nextLine();
-        abilityScores.put("proficiency", profBonus);
+        character.setProfScore(Integer.parseInt(profBonus));
 
         System.out.println("Enter your skill proficiencies separated by a space (ex. acrobatics stealth deception): ");
         skillProficiencies = scanner.nextLine().split(" ");
@@ -125,59 +76,35 @@ public class Roller {
 
         //Prompt the user for the type of roll, attack roll, saving throw, or ability check
         while (keepPlayingInput.equals("y")) {
-            System.out.println("What kind of roll? (Attack roll, Saving Throw, or Ability Check): ");
-            String rollType = scanner.nextLine().toLowerCase();
+            System.out.println("What kind of roll?");
+            System.out.println("1) Attack Roll");
+            System.out.println("2) Saving Throw");
+            System.out.println("3) Ability Check");
+            String rollType = scanner.nextLine();
 
-            //the action
-            if (rollType.equals("attack roll")) {
+            if (rollType.equals("1")) {
                 System.out.println("Strength or Dexterity?: ");
                 attackAbility = scanner.nextLine().toLowerCase();
-                int rollValue = diceRoller.get("20").getRandom();
 
-                if (attackAbility.equals("strength")) {
-                    System.out.println(rollValue + " + " + scoreModifiers.get(abilityScores.get(attackAbility.toLowerCase())) + " + " + abilityScores.get("proficiency"));
-                } else {
-                    System.out.println(rollValue + " + " + scoreModifiers.get(abilityScores.get(attackAbility.toLowerCase())) + " + " + abilityScores.get("proficiency"));
-                }
+                System.out.println(attackRoll.makeAttackRoll(attackAbility, character));
 
                 System.out.println("Please enter the damage dice you would like to roll, separated by a space: ");
                 String[] diceToRoll = scanner.nextLine().split(" ");
 
-                int diceTotal = 0;
-                for (String diceType : diceToRoll) {
-                    int diceResult = diceRoller.get(diceType).getRandom();
+                attackRoll.makeDamageRoll(diceToRoll);
 
-                    if (!diceType.equals("20")) {
-                        diceTotal += diceResult;
-                    }
-                    System.out.println(diceResult);
-                }
-
-                System.out.printf("Total: %d\n", diceTotal);
-            }
-
-            else if (rollType.equals("saving throw")) {
+            } else if (rollType.equals("2")) {
                 System.out.println("What kind of saving throw? ");
                 String typeSavingThrow = scanner.nextLine().toLowerCase();
-                int rollResult = diceRoller.get("20").getRandom();
-                classInstance.get(classType).setSavingThrowProf(); //Protect the list here
 
-                if(classInstance.get(classType).getSavingThrowProf().contains(typeSavingThrow)){
-                    System.out.println(rollResult + " + " + scoreModifiers.get(abilityScores.get(typeSavingThrow)) + " + " + abilityScores.get("proficiency"));
-                } else {
-                    System.out.println(rollResult + " + " + scoreModifiers.get(abilityScores.get(typeSavingThrow)));
-                }
-            }
+                System.out.println(savingThrowRoll.makeSavingThrowRoll(typeSavingThrow, character, classType));
 
-            else if (rollType.equals("ability check")) {
+            } else if (rollType.equals("3")) {
                 System.out.println("What kind of ability check (ex. acrobatics): ");
                 String typeAbilityCheck = scanner.nextLine().toLowerCase();
-                int rollResult = diceRoller.get("20").getRandom();
-                if (charactersSkills.contains(typeAbilityCheck)) {
-                    System.out.println(rollResult + " + " + scoreModifiers.get(abilityScores.get(abilitySkills.get(typeAbilityCheck))) + " + " + abilityScores.get("proficiency"));
-                } else {
-                    System.out.println(rollResult + " + " + scoreModifiers.get(abilityScores.get(abilitySkills.get(typeAbilityCheck))));
-                }
+
+                System.out.println(abilityCheckRoll.makeAbilityCheckRoll(typeAbilityCheck, character, charactersSkills));
+
             }
             System.out.println("Keep playing? (Y or N): ");
             keepPlayingInput = scanner.nextLine().toLowerCase();

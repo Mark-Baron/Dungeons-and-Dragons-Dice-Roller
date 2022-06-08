@@ -5,14 +5,14 @@ import java.util.List;
 
 public class Bard implements Class{
 
-    List savingThrows = new ArrayList<>();
+    List<String> savingThrows = new ArrayList<>();
 
-    public void setSavingThrowProf() {
+    public Bard(){
         savingThrows.add("dexterity");
         savingThrows.add("charisma");
     }
 
-    public List getSavingThrowProf(){
+    public List<String> getSavingThrowProf(){
         return savingThrows;
     }
 }

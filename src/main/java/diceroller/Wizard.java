@@ -5,14 +5,14 @@ import java.util.List;
 
 public class Wizard implements Class{
 
-    List savingThrows = new ArrayList<>();
+    List<String> savingThrows = new ArrayList<>();
 
-    public void setSavingThrowProf() {
+    public Wizard(){
         savingThrows.add("intelligence");
         savingThrows.add("wisdom");
     }
 
-    public List getSavingThrowProf(){
+    public List<String> getSavingThrowProf(){
         return savingThrows;
     }
 }

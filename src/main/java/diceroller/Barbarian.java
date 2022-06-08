@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Barbarian implements Class{
-    List savingThrows = new ArrayList<>();
+    List<String> savingThrows = new ArrayList<>();
 
-    public void setSavingThrowProf() {
+    public Barbarian(){
         savingThrows.add("strength");
         savingThrows.add("constitution");
     }
 
-    public List getSavingThrowProf(){
+    public List<String> getSavingThrowProf(){
         return savingThrows;
     }
 

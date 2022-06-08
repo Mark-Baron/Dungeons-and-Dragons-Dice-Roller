@@ -5,14 +5,15 @@ import java.util.List;
 
 public class Druid implements Class{
 
-    List savingThrows = new ArrayList<>();
+    List<String> savingThrows = new ArrayList<>();
 
-    public void setSavingThrowProf() {
+
+    public Druid(){
         savingThrows.add("intelligence");
         savingThrows.add("wisdom");
     }
 
-    public List getSavingThrowProf(){
+    public List<String> getSavingThrowProf(){
         return savingThrows;
     }
 }
