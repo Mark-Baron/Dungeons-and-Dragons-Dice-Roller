@@ -1,5 +1,8 @@
 package diceroller;
 
+import diceroller.classes.*;
+import diceroller.classes.Class;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -23,7 +26,7 @@ public class SavingThrowRoll extends DiceRolls {
     public String makeSavingThrowRoll(String typeSavingThrow, Character character, String classType){
         int randomRoll = getRandomRoll();
         if (classInstance.get(classType).getSavingThrowProf().contains(typeSavingThrow)) {
-            return (randomRoll + " + " + modifiers.getModifier(character.getAbilityScores(typeSavingThrow)) + " + " + character.getAbilityScores("proficiency")) + " = " + (randomRoll + modifiers.getModifier(character.getAbilityScores(typeSavingThrow)) + character.getAbilityScores("proficiency"));
+            return (randomRoll + " + " + modifiers.getModifier(character.getAbilityScores(typeSavingThrow)) + " + " + character.getAbilityScores("7")) + " = " + (randomRoll + modifiers.getModifier(character.getAbilityScores(typeSavingThrow)) + character.getAbilityScores("7"));
         } else {
             return (randomRoll + " + " + modifiers.getModifier(character.getAbilityScores(typeSavingThrow)) + " = " + (randomRoll + modifiers.getModifier(character.getAbilityScores(typeSavingThrow))));
         }

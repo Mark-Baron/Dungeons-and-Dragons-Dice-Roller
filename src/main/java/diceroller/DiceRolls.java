@@ -8,4 +8,5 @@ public abstract class DiceRolls {
     public int getRandomRoll(){
         return (generator.nextInt(20) + 1);
     }
+
 }

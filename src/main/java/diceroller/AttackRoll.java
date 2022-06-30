@@ -7,10 +7,11 @@ public class AttackRoll extends DiceRolls {
 
     public String makeAttackRoll(String attackAbility, Character character) {
         int randomRoll = getRandomRoll();
-        if (attackAbility.equals("strength")) {
-            return (randomRoll + " + " + modifiers.getModifier(character.getAbilityScores(attackAbility.toLowerCase())) + " + " + character.getAbilityScores("proficiency") + " = " + (randomRoll + modifiers.getModifier(character.getAbilityScores(attackAbility.toLowerCase())) + character.getAbilityScores("proficiency")));
+        //2 is a strength attack, 1 is a dexterity attack
+        if (attackAbility.equals("2")) {
+            return (randomRoll + " + " + modifiers.getModifier(character.getAbilityScores(attackAbility)) + " + " + character.getAbilityScores("7") + " = " + (randomRoll + modifiers.getModifier(character.getAbilityScores(attackAbility)) + character.getAbilityScores("7")));
         } else {
-            return (randomRoll + " + " + modifiers.getModifier(character.getAbilityScores(attackAbility.toLowerCase())) + " + " + character.getAbilityScores("proficiency") + " = " + (randomRoll + modifiers.getModifier(character.getAbilityScores(attackAbility.toLowerCase())) + character.getAbilityScores("proficiency")));
+            return (randomRoll + " + " + modifiers.getModifier(character.getAbilityScores(attackAbility)) + " + " + character.getAbilityScores("7") + " = " + (randomRoll + modifiers.getModifier(character.getAbilityScores(attackAbility)) + character.getAbilityScores("7")));
         }
     }
 

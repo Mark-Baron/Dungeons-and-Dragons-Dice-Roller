@@ -6,34 +6,42 @@ import java.util.Map;
 public class Character {
     Map<String, Integer> abilityScores = new HashMap<>();
 
-    public void setDexScore(int score){
-        abilityScores.put("dexterity", score);
+    //1 is dex
+    public void setDexScore(int score) {
+        abilityScores.put("1", score);
     }
 
-    public void setStrengthScore(int score){
-        abilityScores.put("strength", score);    }
-
-    public void setCharScore(int score){
-        abilityScores.put("charisma", score);
+    //2 is strength
+    public void setStrengthScore(int score) {
+        abilityScores.put("2", score);
     }
 
-    public void setConScore(int score){
-        abilityScores.put("constitution", score);
+    //3 is charisma
+    public void setCharScore(int score) {
+        abilityScores.put("3", score);
     }
 
-    public void setWisScore(int score){
-        abilityScores.put("wisdom", score);
+    //4 is constitution
+    public void setConScore(int score) {
+        abilityScores.put("4", score);
     }
 
-    public void setIntScore(int score){
-        abilityScores.put("intelligence", score);
+    //5 is wisdom
+    public void setWisScore(int score) {
+        abilityScores.put("5", score);
     }
 
-    public void setProfScore(int score){
-        abilityScores.put("proficiency", score);
+    //6 is intelligence
+    public void setIntScore(int score) {
+        abilityScores.put("6", score);
     }
 
-    public Integer getAbilityScores(String ability){
+    //7 is proficiency
+    public void setProfScore(int score) {
+        abilityScores.put("7", score);
+    }
+
+    public Integer getAbilityScores(String ability) {
         return abilityScores.get(ability);
     }
 
