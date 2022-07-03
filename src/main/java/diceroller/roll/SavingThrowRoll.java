@@ -1,13 +1,16 @@
-package diceroller;
+package diceroller.roll;
 
+import diceroller.Character;
 import diceroller.classes.*;
 import diceroller.classes.Class;
+import diceroller.roll.DiceRolls;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class SavingThrowRoll extends DiceRolls {
-    Modifiers modifiers = new Modifiers();
     Map<String, Class> classInstance = new HashMap<>();
 
     public SavingThrowRoll(){
@@ -23,12 +26,22 @@ public class SavingThrowRoll extends DiceRolls {
         classInstance.put("5", new Monk());
     }
 
-    public String makeSavingThrowRoll(String typeSavingThrow, Character character, String classType){
+    public Object[] makeSavingThrowRoll(String typeSavingThrow, Character character, String classType){
+        List<Integer> savingThrowNums = new ArrayList<>();
         int randomRoll = getRandomRoll();
+        int rollTotal;
+        savingThrowNums.add(randomRoll);
+        savingThrowNums.add(getModifier(typeSavingThrow, character));
+
         if (classInstance.get(classType).getSavingThrowProf().contains(typeSavingThrow)) {
-            return (randomRoll + " + " + modifiers.getModifier(character.getAbilityScores(typeSavingThrow)) + " + " + character.getAbilityScores("7")) + " = " + (randomRoll + modifiers.getModifier(character.getAbilityScores(typeSavingThrow)) + character.getAbilityScores("7"));
+            savingThrowNums.add(character.getAbilityScores("7"));
+            rollTotal = randomRoll + getModifier(typeSavingThrow, character) + character.getAbilityScores("7");
+            savingThrowNums.add(rollTotal);
+            return savingThrowNums.toArray();
         } else {
-            return (randomRoll + " + " + modifiers.getModifier(character.getAbilityScores(typeSavingThrow)) + " = " + (randomRoll + modifiers.getModifier(character.getAbilityScores(typeSavingThrow))));
+            rollTotal = randomRoll + getModifier(typeSavingThrow, character);
+            savingThrowNums.add(rollTotal);
+            return savingThrowNums.toArray();
         }
     }
 }
