@@ -1,4 +1,4 @@
-package diceroller;
+package diceroller.classes;
 
 import java.util.List;
 
